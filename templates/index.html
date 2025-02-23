@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JumboFit</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+
+<body>
+
+  <!-- Header / Nav -->
+  <header>
+    <h1>Welcome to JumboFit</h1>
+  </header>
+
+  <!-- PROFILE DROPDOWN -->
+  <!-- <div class="profile-button">
+    <button id="myprofile">Profile</button>
+  </div> -->
+  <div class="profile-dropdown">
+    <button class="profile-dropdown-btn">Profile</button>
+    <ul class="profile-dropdown-list">
+      <li><a href="/account">Account Info</a></li>
+      <li><a href="/gymbuddies">Gym Buddies</a></li>
+      <li><a href="/workout-preferences">Workout Preferences</a></li>
+      <li><a href="/" id="logout-link" >Logout</a></li>
+    </ul>
+  </div>
+
+  <!-- PROFILE SECTION -->
+  <section id="profile-section" class="hidden-section">
+    <h2>My Profile</h2>
+    <p></p>
+    <ul>
+      <li>Name: {{ name }}</li>
+      <li>Email: {{ email }}</li>
+      <li>Current Preferred Workout Time: </li>
+    </ul>
+    <div class="signout-button">
+      <button id="signout-button">Sign-Out</button>
+    </div>
+
+    <script>
+      document.getElementById("signout-button").addEventListener("click", function() {
+        window.location.href= "/logout";
+      });
+  </script>
+  </section> 
+
+  
+  <!-- Navigation Buttons -->
+  <nav class="bottom-nav">
+    <button id="btn-home" class="active">Home</button>
+    <button id="btn-workouts">Workouts</button>
+    <button id="btn-journey">My Journey</button>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <!-- HOME SECTION -->
+    <section id="home-section" class="active-section">
+      <div class="home-text">
+        <!-- <h2>JumboFit</h2> -->
+        <h3>Real-time Gym Traffic, Workout Generation, and more!</h3>
+      </div>
+      
+      <!--<div class="cta-buttons">
+        <button id="open-signup">Sign Up</button>
+        <button id="open-survey">Take Survey</button>
+      </div> -->
+
+      <div class="status">
+        <div id="at-gym" class="hidden-section">
+          <h3>
+            AT GYM
+          </h3>
+        </div>
+        <div id="at-home" class="active-section">
+          <h3>
+            AT HOME
+          </h3>
+        </div>
+      </div>
+      
+
+      <button id="gym-toggle" class="toggle">
+        <div class = "toggle-circle"></div>
+      </button>
+
+      <script>
+        let isGymToggled = false; // Boolean to track state
+        let start = null;
+        let end = null;
+
+        document.getElementById("gym-toggle").addEventListener("click", function() {
+            isGymToggled = !isGymToggled; // Toggle the boolean value
+            if (isGymToggled) {
+        start = new Date(); // Store start time
+        console.log("Gym session started at:", start.toLocaleTimeString());
+    } else {
+        end = new Date(); // Store end time
+        console.log("Gym session ended at:", end.toLocaleTimeString());
+
+        // Calculate duration in milliseconds
+        let durationMs = end - start;
+
+        // Convert to hours, minutes, and seconds
+        let hours = Math.floor(durationMs / (1000 * 60 * 60));
+        let minutes = Math.floor((durationMs % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((durationMs % (1000 * 60)) / 1000);
+
+        console.log(`Total Gym Time: ${hours}h ${minutes}m ${seconds}s`);
+    }
+        });
+    </script>
+
+      <!-- <div class="business">
+        <h1>Level of Business:</h1>
+      </div> -->
+
+      <div class="container">
+        <h1>Facilities Hours / General Information</h1>
+        <p>The Tufts University Athletics facilities are open for use by the entire Tufts community. Tufts University students, faculty, and staff members are encouraged to utilize the facilities for physical fitness, recreation, and competition.</p>
+        
+        <h2>STEVE TISCH SPORTS AND FITNESS CENTER</h2>
+        
+        <table class="gym-dates">
+            <thead>
+                <tr>
+                    <th>Sep 2 - Dec 20</th>
+                    <th>Jan 6 - May 18</th>
+                    <th>May 18 - Aug 8</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>M-F:</strong> 6:30am - 11:00pm</td>
+                    <td><strong>M-F:</strong> 6:30am - 11:00pm</td>
+                    <td><strong>M-Th:</strong> 7:00am - 8:30pm</td>
+                </tr>
+                <tr>
+                    <td><strong>Sat:</strong> 8:00am - 8:00pm</td>
+                    <td><strong>Sat:</strong> 8:00am - 8:00pm</td>
+                    <td><strong>F:</strong> 7:00am - 6:00pm</td>
+                </tr>
+                <tr>
+                    <td><strong>Sun:</strong> 10:00am - 10:30pm</td>
+                    <td><strong>Sun:</strong> 10:00am - 10:30pm</td>
+                    <td><strong>Sat:</strong> 8:00am - 12:00pm</td>
+                </tr>
+                <tr>
+                    <td colspan="2"></td>
+                    <td><strong>Sun:</strong> 4:00pm - 8:00pm</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p class="closed-dates"><strong>Closed:</strong> Nov 27-30, Dec 21 - Jan 5, May 18th, July 3-5</p>
+    </div>
+    </section>
+
+    <!-- WORKOUTS SECTION -->
+    <section id="workouts-section" class="hidden-section">
+      <div class="workout-text">
+        <h2>Workouts</h2>
+        <p>Choose from a variety of workouts tailored to your goals!</p>
+      </div>
+      <div class="custom-dropdown">
+        <button class="dropdown-btn">Select a Workout</button>
+        <ul class="dropdown-list">
+          <li data-value = "beginner-fullbody">Beginner Full-Body</li>
+          <li data-value="hiit-cardio">HIT Cardio</li>
+          <li data-value="training">Training</li>
+          <li data-value="flexibility">Flexibility</li>
+          <li data-value="generatedWork">Generated Workout</li>
+        </ul>
+        </div>
+
+        <!-- Section for the Generated Workout question, initially hidden -->
+          <div id="generated-workout-form" style="display:none;">
+            <input type="text" id="muscle-question" placeholder="Enter workout type">
+            <button id="submit-question">Generate Workout</button>
+        </div>
+      
+      <p id="generated-workout-response"></p>
+    </section>
+    
+    <!-- MY JOURNEY SECTION -->
+    <section id="journey-section" class="hidden-section">
+        <h2>My Journey</h2>
+        <p>Track your progress and achievements.</p>
+        <div class="myjourney-buttons">
+          <button id="progress">Progress</button>
+          <button id="achievements">Achievements</button>
+          <button id="goals">Goals</button>
+          <!--<button id="buddies">Gym Buddies</button>0-->
+        </div>
+      </section>
+    </main>
+
+    <!-- PROGRESS SECTION -->
+    <section id="progress-section" class="hidden-section">
+        <h2>Progress</h2>
+        <p>Track your progress here!</p>
+        <ul>
+          <li>Completed 10 Workouts</li>
+          <li>Lost 5 lbs</li>
+          <li>Improved Mile Time by 1 Minute</li>
+        </ul>
+        <div class="back-button">
+          <button id="back1">Back</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- ACHIEVEMENTS SECTION -->
+    <section id="achievements-section" class="hidden-section">
+        <h2>Achievements</h2>
+        <p>Track your achievements here!</p>
+        <ul>
+          <li>Ran 1 mile in 5 minutes!</li>
+        </ul>
+        <div class="back-button">
+          <button id="back2">Back</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- GOALS SECTION -->
+    <section id="goals-section" class="hidden-section">
+        <h2>Goals</h2>
+        <p>Track your goals here!</p>
+        <ul>
+          <li></li>
+        </ul>
+        <div class="back-button">
+          <button id="back3">Back</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- GYM BUDDY SECTION -->
+    <section id="gymbuddy-section" class="hidden-section">
+        <h2>Gym Buddies</h2>
+        <p>See your current Gym Buddies and find new ones here!</p>
+        <p>Current Buddies:</p>
+        <ul>
+          <li></li>
+        </ul>
+      </section>
+    </main>
+
+    <!-- PROFILE DROPDOWN SECTION
+  <div class="profile-dropdown">
+    <button class="profile-dropdown-btn">Profile</button>
+    <ul class="profile-dropdown-list">
+      <li><a href="/account">Account Info</a></li>
+      <li><a href="/gymbuddies">Gym Buddies</a></li>
+      <li><a href="/workout-preferences">Workout Preferences</a></li>
+    </ul>
+  </div> -->
+
+
+  </main>
+
+  <!-- Sign-Up Modal -->
+  <div id="signup-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" id="close-signup">&times;</span>
+      <h3>Sign Up</h3>
+      <form>
+        <label for="signup-name">Name:</label>
+        <input type="text" id="signup-name" placeholder="John Doe" required />
+
+        <label for="signup-email">Email:</label>
+        <input type="email" id="signup-email" placeholder="john@example.com" required />
+
+        <label for="signup-password">Password:</label>
+        <input type="password" id="signup-password" required />
+
+        <button type="submit">Create Account</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Survey Modal -->
+  <div id="survey-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" id="close-survey">&times;</span>
+      <h3>Member Survey</h3>
+      <form>
+        <label for="survey-experience">How was your gym experience?</label>
+        <select id="survey-experience" required>
+          <option value="">--Select an option--</option>
+          <option value="great">Great</option>
+          <option value="good">Good</option>
+          <option value="okay">Okay</option>
+          <option value="bad">Bad</option>
+        </select>
+
+        <label for="survey-time">Preferred Workout Time:</label>
+        <select id="survey-time" required>
+          <option value="">--Select a time--</option>
+          <option value="morning">Morning (5 AM - 9 AM)</option>
+          <option value="afternoon">Afternoon (12 PM - 3 PM)</option>
+          <option value="evening">Evening (5 PM - 9 PM)</option>
+          <option value="late-night">Late Night (10 PM - 2 AM)</option>
+        </select>
+
+        <label for="survey-goals">What are your fitness goals?</label>
+        <textarea id="survey-goals" placeholder="Share your goals here..." required></textarea>
+
+        <button type="submit">Submit Survey</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("gym-toggle").addEventListener("click", function () {
+        fetch("/toggle-checkin", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({})
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                if (data.checked_in) {
+                    document.getElementById("at-gym").classList.remove("hidden-section");
+                    document.getElementById("at-home").classList.add("hidden-section");
+                } else {
+                    document.getElementById("at-gym").classList.add("hidden-section");
+                    document.getElementById("at-home").classList.remove("hidden-section");
+                }
+                console.log("Check-in status updated:", data.checked_in);
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => console.error("Error:", error));
+    });
+</script>
+  <!-- JavaScript -->
+  <script src="/static/script.js"></script>
+</body>
+</html>

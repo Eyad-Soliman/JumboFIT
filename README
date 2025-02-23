@@ -1,0 +1,15 @@
+# JumboFit
+Before running the program you must have the following:
+1. Have Python 3.12.7 or greater
+2. Activate the virtual environment
+    - Windows Powershell, run this code: venv\Scripts\Activate
+    - Linux: source venv/bin/activate
+3. Once virtual environment is activated, run the code: pip install -r requirements.txt
+    - Here you should now have all the needed libraries installed.
+4. Activate the backend server by typing:
+    - Windows Powershell: python .\server.py  
+    - Linux: python3 .\server.py
+
+5. Once the server is established, right click on register.html(under templates),
+click on copy path, and go to a browser(chrome, internet explorer etc) and run
+the program.
