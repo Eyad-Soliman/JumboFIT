@@ -5,12 +5,12 @@ import os
 from openai import OpenAI
 
 app=Flask(__name__, template_folder="templates")
-app.secret_key = "secretkey123"
+app.secret_key = "enter-any-key"
 con=mysql.connector.connect(
     host='localhost',
-    username='root',
-    password='Dracut_10315',
-    database='jumbo_fit'
+    username='your_username',
+    password='your_password',
+    database='db_name'
 )
 
 cursor=con.cursor()
